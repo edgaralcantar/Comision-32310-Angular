@@ -1,0 +1,32 @@
+.container-fluid{
+    color: white;
+    background-color: gray;
+    height: 100vh;
+}
+.f1{
+    background-color:  #c0bfbf;
+    color: white;
+    margin: 5px;
+    
+    overflow:hidden;
+ }
+ .f2{
+    background-color:  #c0bfbf;
+    color: white;
+    margin: 5px;
+    overflow:hidden;
+ }
+ .f3{
+    height: 50px;
+ }
+ table {
+  width: 100%;
+  height: 100%;
+    border: #b2b2b2 1px solid;
+  }
+  td, th {
+    border: black 1px solid;
+  }
+.fondo {
+    background-color: lightblue;
+  }

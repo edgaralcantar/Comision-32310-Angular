@@ -1,0 +1,23 @@
+.container-fluid{
+    
+    background-color: gray;
+    height: 100vh;
+}
+.f1{
+   background-color:  #c0bfbf;
+   color: white;
+   margin: 5px;
+}
+.h1{
+    color: black;
+}
+.titulo{
+   
+    color: white;
+}
+div{
+    margin: 5px;
+}
+.img{
+    margin: 5px;
+}
