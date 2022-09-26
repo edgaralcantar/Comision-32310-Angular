@@ -21,4 +21,7 @@ import {Inscripcion} from './inscripcion'
         inscribir() {
             return 'Inscribiendo usuario';
         }
+        obtenerCorreo(){
+            return this.correo;
+        }
         }
