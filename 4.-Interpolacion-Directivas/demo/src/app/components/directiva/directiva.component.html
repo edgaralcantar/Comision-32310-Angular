@@ -1,0 +1,62 @@
+<h1>Directivas de atributos</h1>
+<h2>Directivas ngClass</h2>
+
+<p class="grande" [ngClass]="variable1 < 5 ? 'texto-error' : 'texto-exito grande'">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam aut, autem nam ab amet beatae provident quasi sapiente aspernatur temporibus neque, magni esse quidem soluta eligendi, voluptatibus officiis optio delectus.</p>
+<p [class.texto-error]="true">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam aut, autem nam ab amet beatae provident quasi sapiente aspernatur temporibus neque, magni esse quidem soluta eligendi, voluptatibus officiis optio delectus.</p>
+<p [ngClass]="variable1 < 5 ? 'texto-error' : variable1 === 5 ? 'texto-exito' : '' ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam aut, autem nam ab amet beatae provident quasi sapiente aspernatur temporibus neque, magni esse quidem soluta eligendi, voluptatibus officiis optio delectus.</p>
+
+<hr>
+<h2>Directivas ngStyle</h2>
+<p [style.border]="variable2 === 5 ? '1px solid black' : '1px solid red'">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam aut, autem nam ab amet beatae provident quasi sapiente aspernatur temporibus neque, magni esse quidem soluta eligendi, voluptatibus officiis optio delectus.</p>
+
+<hr>
+<h2>Directivas personalizada</h2>
+<p appDirectivaPerzonalizada>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam aut, autem nam ab amet beatae provident quasi sapiente aspernatur temporibus neque, magni esse quidem soluta eligendi, voluptatibus officiis optio delectus.</p>
+
+<hr>
+
+<h1>Directivas estructurales</h1>
+<h2>Directiva ngFor</h2>
+<p>{{ListaNombres}}</p>
+<hr>
+
+<ol>
+    <li *ngFor = "let nombre of ListaNombres">
+        {{nombre.nombre}} - {{nombre.edad}}
+    </li>
+</ol>
+
+<hr>
+<h2>Directiva ngIf</h2>
+<ol>
+    <div *ngFor = "let persona of ListaNombres">
+<li *ngIf = "persona.edad > 24">
+    <!--<li *ngIf = "persona.edad > 24 && persona === 'juan'">-->
+<div>{{persona.nombre}} - {{persona.edad}}</div>
+</li>
+    </div>
+</ol>
+<hr>
+<h2>Directiva ngSwitch</h2>
+
+<div [ngSwitch]="usuarioActivo.nombre">
+<div *ngSwitchCase="'Laura'"> Usuario Activo es Laura</div>
+<div *ngSwitchCase="'Juan'"> Usuario Activo es Juan</div>
+<div *ngSwitchDefault=""> Usuario Activo es {{usuarioActivo.nombre}}</div>
+
+</div>
+
+<hr>
+<h2>Pipes</h2>
+<p>{{fecha | date: 'dd/MM/yy'}} </p>
+<ol>
+    <div *ngFor = "let persona of ListaNombres">
+<li >
+<div>{{persona | json}}</div>
+<div>{{persona.nombre | uppercase}}</div>
+<div>{{persona.nombre | lowercase}}</div>
+<div>{{persona.nombre | titlecase}}</div>
+</li>
+    </div>
+</ol>
+<hr>
