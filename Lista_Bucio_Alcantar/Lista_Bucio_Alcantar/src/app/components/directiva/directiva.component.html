@@ -1,0 +1,65 @@
+<div>
+    <h6 class="text-center titulos">PROMEDIOS GENERALES</h6>
+</div>
+<div class=" text-center f2">   
+        <table border="2" >
+            <tr>
+                <th class="fondo">Nombre</th>
+                <th class="fondo">Grupo</th>
+                <th class="fondo">Grado</th>
+                <th class="fondo">Promedio</th>
+                </tr>
+            <tr *ngFor="let dato of listaAlumnos">
+            <th class="fondo">{{dato.nombre | titlecase}} {{dato.apellidos  | titlecase}}</th>
+            <td >{{dato.grupo}}</td>
+            <td >{{dato.grado}}</td>
+            <td [ngClass]="dato.promedio < 6 ? 'celda-roja' : 'celda-verde'">{{dato.promedio}}</td>
+            </tr>
+            </table>
+    </div>
+<hr>
+    <div>
+        <h6 class="text-center titulos">PROXIMOS A EGRESAR</h6>
+    </div>
+    <div class=" text-center f2">   
+            <table border="2" >
+                <tr>
+                    <th class="fondo">Nombre</th>
+                    <th class="fondo">Grupo</th>
+                    <th class="fondo">Grado</th>
+                    <th class="fondo">Promedio</th>
+                    </tr>
+                   <!--<div  *ngFor="let dato of listaAlumnos">*ngIf = "dato.grado === 6" --> 
+                <tr *ngFor="let dato of listaAlumnos" >
+                <th *ngIf = "dato.grado === 6 && dato.promedio > 5" class="fondo" >{{dato.nombre | titlecase}} {{dato.apellidos | titlecase}}</th>
+                <td *ngIf = "dato.grado === 6 && dato.promedio > 5">{{dato.grupo}}</td>
+                <td *ngIf = "dato.grado === 6 && dato.promedio > 5">{{dato.grado}}</td>
+                <td *ngIf = "dato.grado === 6 && dato.promedio > 5">{{dato.promedio}}</td>
+                </tr>
+            <!--   </div>--> 
+
+                </table>
+        </div>
+   <hr>
+        <div>
+            <h6 class="text-center titulos">NO EGRESARAN</h6>
+        </div>
+        <div class=" text-center f2">   
+                <table border="2" >
+                    <tr>
+                        <th class="fondo">Nombre</th>
+                        <th class="fondo">Grupo</th>
+                        <th class="fondo">Grado</th>
+                        <th class="fondo">Promedio</th>
+                        </tr>
+                       <!--<div  *ngFor="let dato of listaAlumnos">*ngIf = "dato.grado === 6" --> 
+                    <tr *ngFor="let dato of listaAlumnos" >
+                    <th *ngIf = "dato.grado === 6 && dato.promedio < 6" class="fondo" >{{dato.nombre | titlecase}} {{dato.apellidos | titlecase}}</th>
+                    <td *ngIf = "dato.grado === 6 && dato.promedio < 6">{{dato.grupo}}</td>
+                    <td *ngIf = "dato.grado === 6 && dato.promedio < 6">{{dato.grado}}</td>
+                    <td *ngIf = "dato.grado === 6 && dato.promedio < 6">{{dato.promedio}}</td>
+                    </tr>
+                <!--   </div>--> 
+    
+                    </table>
+            </div>
