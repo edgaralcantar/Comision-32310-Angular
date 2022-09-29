@@ -1,0 +1,11 @@
+<div class="clase-hijo">
+    <p>componente-hijo works!</p>
+    usuarioActivo: {{UsuarioActivo.nombre}}
+    <ol>
+        <li *ngFor = "let estudiante of estudiantes">
+         <p>Hola soy {{estudiante.nombre}} y estoy en el curso de {{estudiante.curso}}</p>
+        </li>
+    </ol>
+    <input type="text" [(ngModel)]="nombreEstudiante">
+    <button (click)="agregarEstudiante()">Agregar Estudiante</button>
+</div>

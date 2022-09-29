@@ -1,0 +1,13 @@
+<div class="clase-padre">
+<p>componente-padre works!</p>
+
+<app-componente-hijo 
+ [estudiantes]="estudiantesPadre"
+  [UsuarioActivo]="{nombre: 'mario'}"
+   [funcionPrueba]="funcionPrueba"
+   (eventosalida)="manejarEventoSalida($event)"
+   (eventosalidaEstudiante)="agregarEstudiante($event)"
+   > 
+</app-componente-hijo>
+<p >{{mensajeSalida}}</p>
+</div>
