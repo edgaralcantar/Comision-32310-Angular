@@ -1,0 +1,24 @@
+<h1>formularios basados en plantillas!</h1>
+
+<form #formularioClase>
+
+    <div>
+        <label for="">Nombre del curso:</label>
+        <input type="text" [(ngModel)]="clase.nombre" name="nombre" />
+        
+    </div>
+
+    <div>
+        <label for="">Profesor:</label>
+        <select  [(ngModel)]="clase.profesor" name="profesor">
+            <option value = "Abner">Abner</option>
+            <option value = "Jorge">Jorge</option>
+        </select>
+        
+    </div>
+
+    <button type="submit" (click)="agregarClase()">Agregar Clase </button>
+
+    {{ clase  | json}}
+
+</form>
