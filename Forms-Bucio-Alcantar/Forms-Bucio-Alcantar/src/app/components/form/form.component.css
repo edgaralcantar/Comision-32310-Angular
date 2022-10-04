@@ -1,0 +1,21 @@
+.column{
+ margin: 5px;
+}
+.tam{
+    width: 100%;
+}
+.boton{
+    
+margin-bottom: 5px;
+text-align: center;
+}
+.txtrojo{
+    color: red;
+}
+.fondo{
+    background-color: rgb(196, 194, 194);
+}
+.mgn{
+    margin-top: 5px;
+    margin-bottom: 2px;
+}

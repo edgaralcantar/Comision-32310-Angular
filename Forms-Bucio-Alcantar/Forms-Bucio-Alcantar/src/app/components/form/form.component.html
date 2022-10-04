@@ -1,0 +1,124 @@
+
+<form [formGroup]="formularioUsuario"class=" fondo">
+ <div class="row mgn">
+    <div class="col-3"></div>
+    <div class="col-1 column">
+    <label >Nombre:</label>
+    
+   
+  </div>
+<div class="col-4 mgn">
+    <input type="text" formControlName="nombre" class="tam" />
+    <p class="txtrojo" *ngIf="formularioUsuario.get('nombre')?.touched && formularioUsuario.get('nombre')?.errors?.['required']">*Este campo es requerido</p>
+
+</div>
+<div class="col-3"></div>
+ </div>
+ 
+
+ <div class="row">
+    <div class="col-3"></div>
+    <div class="col-1 column">
+    <label >Apellidos:</label>
+    
+    
+</div>
+<div class="col-4">
+    <input type="text" formControlName="apellido" class="tam" />
+        <p class="txtrojo" *ngIf="formularioUsuario.get('apellido')?.touched && formularioUsuario.get('apellido')?.errors?.['required']">*Este campo es requerido</p>
+   
+</div>
+<div class="col-3"></div>
+ </div>
+
+ 
+ <div class="row">
+    <div class="col-3"></div>
+    <div class="col-1 column">
+    <label >Edad:</label>
+
+</div>
+<div class="col-4">
+    <input type="number" formControlName="edad" class="tam" />
+    <p class="txtrojo"*ngIf="formularioUsuario.get('edad')?.touched && formularioUsuario.get('edad')?.errors?.['required']">*Este campo es requerido</p>
+</div>
+<div class="col-3"></div>
+ </div>
+ 
+
+
+ <div class="row">
+    <div class="col-3"></div>
+    <div class="col-1 column">
+    <label >Telefono:</label>
+
+</div>
+<div class="col-4">
+    <input type="number" formControlName="telefono" class="tam"/>
+    <p class="txtrojo" *ngIf="formularioUsuario.get('telefono')?.touched && formularioUsuario.get('telefono')?.errors?.['required']">*Este campo es requerido</p>
+</div>
+<div class="col-3"></div>
+ </div>
+ 
+
+ <div class="row">
+    <div class="col-3"></div>
+    <div class="col-1 column">
+    <label >Correo:</label>
+
+</div>
+<div class="col-4">
+    <input type="text" formControlName="correo" class="tam"/>
+    <p class="txtrojo" *ngIf="formularioUsuario.get('correo')?.touched && formularioUsuario.get('correo')?.errors?.['required']">*Este campo es requerido</p>
+    <p class="txtrojo" *ngIf="formularioUsuario.get('correo')?.touched && formularioUsuario.get('correo')?.errors?.['pattern']">*El formato no es correcto</p>
+</div>
+<div class="col-3"></div>
+ </div>
+ 
+ 
+ <div class="row">
+    <div class="col-3"></div>
+    <div class="col-1 column">
+    <label >Contraseña:</label>
+
+</div>
+<div class="col-4">
+    <input type="password" formControlName="contrasena" class="tam"/>
+    <p class="txtrojo" *ngIf="formularioUsuario.get('contrasena')?.touched && formularioUsuario.get('contrasena')?.errors?.['required']">*Este campo es requerido</p>
+    <p class="txtrojo" *ngIf="formularioUsuario.get('contrasena')?.touched && formularioUsuario.get('contrasena')?.errors?.['minlength']">*Minimo deben ser 5 caracteres</p>
+    <p class="txtrojo" *ngIf="formularioUsuario.get('contrasena')?.touched && formularioUsuario.get('contrasena')?.errors?.['pattern']">*La contraseña debe tener al menos una mayuscula</p>
+ </div>
+ <div class="col-3"></div>
+ </div>
+ 
+
+ <div class="row">
+    <div class="col-3"></div>
+    <div class="col-1 column">
+    <label >Confirmar Contraseña:</label>
+
+</div>
+<div class="col-4">
+    <input type="password" formControlName="contrasena2" class="tam" />
+    <p class="txtrojo" *ngIf="formularioUsuario.get('contrasena2')?.touched && formularioUsuario.get('contrasena2')?.errors?.['required']">*Este campo es requerido</p>
+    <p class="txtrojo" *ngIf="formularioUsuario.get('contrasena2')?.touched && formularioUsuario.get('contrasena2')?.errors?.['minlength']">*Minimo deben ser 5 caracteres</p>
+    <div *ngIf="formularioUsuario.get('contrasena2')?.touched ">
+        <p class="txtrojo" *ngIf="!contrasenasIguales">*Las contraseñas deben ser iguales</p>
+    </div>
+   
+    </div>
+    <div class="col-3"></div>
+ </div>
+ 
+
+
+
+    
+   <div  class="boton">
+    <button (click)="agregarUsuario() "type="submit" [disabled]="formularioUsuario.invalid" class="boton">Agregar usuario</button>
+   </div>
+
+
+</form>
+
+<hr>

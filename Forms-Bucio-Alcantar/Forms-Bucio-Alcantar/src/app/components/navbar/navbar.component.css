@@ -1,0 +1,13 @@
+.container-fluid{
+    background-color: black;
+ padding: 5px;
+}
+.navbar-brand{
+    color: aliceblue;
+}
+.nav-link{
+    color: aliceblue;
+}
+.btn-outline-success{
+    color: white;
+}

@@ -1,0 +1,23 @@
+<div  class="boton">
+    <button (click)="Actualizar() "type="button" >Actualizar Usuarios</button>
+   </div>
+<div class=" text-center f2">   
+        <table border="2" >
+            <tr>
+                <th class="fondo">Nombre</th>
+                <th class="fondo">Edad</th>
+                <th class="fondo">Telefono</th>
+                <th class="fondo">Correo</th>
+                </tr>
+            <tr *ngFor="let dato of lista">
+            <th class="fondo">{{dato.nombre | titlecase}} {{dato.apellidos  | titlecase}}</th>
+            <td >{{dato.edad}}</td>
+            <td >{{dato.telefono}}</td>
+            <td >{{dato.correo}}</td>
+           
+            </tr>
+            </table>
+    </div>
+
+
+
