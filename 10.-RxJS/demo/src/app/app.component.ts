@@ -52,12 +52,12 @@ export class AppComponent implements OnInit, OnDestroy {
     //   console.log('Desde el of: ', cursos);
     // });
     
-    // from(this.cursos).pipe(
-    //   filter((curso: Curso) => curso.nombre === 'Angular')
-    // )
-    // .subscribe((cursos) => {
-    //   console.log('Desde el from: ', cursos);
-    // });
+     from(this.cursos).pipe(
+       filter((curso: Curso) => curso.nombre === 'Angular')
+     )
+     .subscribe((cursos) => {
+      console.log('Desde el from: ', cursos);
+     });
 
     // of(this.cursos).pipe(
     //   mergeMap(
@@ -65,20 +65,20 @@ export class AppComponent implements OnInit, OnDestroy {
     //   )
     // ).subscribe(cursos => console.log('Utilizando mergemap', cursos));
 
-    this.merge$ = of(['a', 'b', 'c', 'd']).pipe(
+    /*this.merge$ = of(['a', 'b', 'c', 'd']).pipe(
       mergeMap(
         letras => interval(2000).pipe(
           map((i) => i + letras[i])
         )
       )
-    );
+    );*/
   }
 
   agregarCurso(){
     let curso: Curso = {
         nombre: 'TypeScript',
         comision: '32320',
-        profesor: 'Jesica',
+        profesor: 'Jesica1',
         fechaInicio: new Date(),
         fechaFin: new Date()
       }
