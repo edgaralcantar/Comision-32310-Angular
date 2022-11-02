@@ -1,0 +1,21 @@
+<h3 class="titulo">Detalles del curso {{curso.nombre}}</h3>
+<div class="center">
+    <img  [src]="curso.imagen" width="30%" style="border: 3px solid; color: black" >
+</div>
+<div>
+    <h2  class="center ">Profesor: {{curso.profesor }}</h2>
+</div>
+<div>
+    <h2  class="center ">Inicio de curso: {{curso.fechaInicio | date: 'dd/MM/YYYY'}}</h2>
+</div>
+<div>
+    <h2  class="center ">Fin de curso: {{curso.fechaFin | date: 'dd/MM/YYYY'}}</h2>
+</div>
+<div class="row">
+    <h2  class="center "><span [appBooleanoEstiloCursos]="curso.inscripcionAbierta">Inscripcion: {{curso.inscripcionAbierta | booleanATextoCursos: 'Abierta' : 'Cerrada' | uppercase}}</span> </h2>
+</div>
+<div style="border: 3px solid; color: black">
+    <h2 class="center">Descripcion del curso:</h2>
+    <p class="center"> {{curso.descripcion}}</p>
+</div>
+

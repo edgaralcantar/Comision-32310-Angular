@@ -16,6 +16,7 @@ import { ListaAlumnosComponent } from "../alumnos/components/lista-alumnos/lista
 import { FooterComponent } from "./components/footer/footer.component";
 import { ToolbarComponent } from "./components/toolbar/toolbar.component";
 import { SidevarComponent } from "./components/sidevar/sidevar.component";
+import { CoreRoutingModule } from "./core-routing.module";
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import { SidevarComponent } from "./components/sidevar/sidevar.component";
       CommonModule,
       FormsModule,
       MaterialModule, 
-     
+     CoreRoutingModule
     ],
     providers: [
     

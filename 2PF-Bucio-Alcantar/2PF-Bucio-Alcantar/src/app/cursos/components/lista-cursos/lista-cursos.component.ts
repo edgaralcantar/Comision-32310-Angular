@@ -53,32 +53,28 @@ export class ListaCursosComponent implements OnInit {
    
   }
   agregarCurso(){
-    let curso: Curso = {
-      id:5,
-      nombre: 'Kotlin',
-      comision: '34310',
-      profesor: 'Mario',
-      fechaInicio: new Date(2022, 5, 1),
-      fechaFin: new Date(2022, 6, 30),
-      inscripcionAbierta: false,
-      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg'
-     }
-    this.cursoService.agregarCurso(curso);
+    this.router.navigate(['form-curso']);
   }
   filtroCurso(){
      console.log(this.filtro);
+    
     this.cursos$ = this.cursoService.obtenerCursosObservable().pipe(
-      map((cursos: Curso[]) => cursos.filter((curso: Curso) => curso.nombre.toLocaleLowerCase().includes(this.filtro.toLocaleLowerCase()) || 
+      map((cursos: Curso[]) => cursos.filter((curso: Curso) => curso.nombre.toLocaleLowerCase().includes(this.filtro.toLocaleLowerCase()) /*|| 
       curso.comision.includes(this.filtro) ||
-      curso.fechaInicio.getMonth() + 1 == parseInt(this.filtro)))
+      curso.fechaInicio.getMonth() + 1 == parseInt(this.filtro)*/))
      
      )
   }
   eliminarCurso(id: number){
     this.cursoService.eliminarCurso(id);
+    this.cursos$ = this.cursoService.obtenerCursosObservable();
   }
   editarCurso(curso: Curso){
     console.log(curso);
-    this.router.navigate(['editar-curso', curso]);
+    this.router.navigate(['editar-curso', curso],/*{skipLocationChange: true }*/ );
+  }
+  verCurso(curso: Curso){
+    console.log("se va a mandar "+curso);
+    this.router.navigate(['detalle-curso/', curso], /*{skipLocationChange: true }*/);
   }
 }

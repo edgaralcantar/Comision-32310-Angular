@@ -28,6 +28,9 @@ import { ListaCursosComponent } from './cursos/components/lista-cursos/lista-cur
 import { PaginaNoEncontradaComponent } from './core/components/pagina-no-encontrada/pagina-no-encontrada.component';
 import { PaginaNoEncontradaCComponent } from './cursos/components/pagina-no-encontrada-c/pagina-no-encontrada-c.component';
 import { EditarCursoComponent } from './cursos/components/editar-curso/editar-curso.component';
+import { DetalleCursoComponent } from './cursos/components/detalle-curso/detalle-curso.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -44,26 +47,34 @@ import { EditarCursoComponent } from './cursos/components/editar-curso/editar-cu
   imports: [
     
     CoreModule,
-   
+   CursosModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
     BrowserModule,
-    RouterModule.forRoot([
+    HttpClientModule,
+    AppRoutingModule,
+
+   /* RouterModule.forRoot([
       {path: '', component: HomeComponent},
       {path: 'home', component: HomeComponent},
+      {path: 'cursos',
+    loadChildren: () => import('./cursos/cursos.module').then((m) => m.CursosModule )
+    },
       {path: 'toolbar', component: ToolbarComponent},
       {path: 'lista-alumnos', component: ListaAlumnosComponent},
       {path: 'lista-cursos', component: ListaCursosComponent},
-      {path: 'editar-curso', component: EditarCursoComponent},
+   //   {path: 'editar-curso', component: EditarCursoComponent},
       {path: 'footer', component: FooterComponent},
       {path: 'pagina-no-encontrada-c', component: PaginaNoEncontradaCComponent},
      {path: 'form-alumno', component: FormAlumnoComponent},
+   //  {path: ':id', component: DetalleCursoComponent},
       {path: '**',component: HomeComponent}
+
     
-        ]),
+        ]),*/
   ],
   providers: [],
   bootstrap: [AppComponent]

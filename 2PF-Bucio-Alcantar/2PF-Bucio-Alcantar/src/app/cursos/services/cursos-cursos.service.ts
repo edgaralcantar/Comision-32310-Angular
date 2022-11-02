@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, map } from 'rxjs';
 import { Curso } from 'src/app/models/curso';
 
 @Injectable({
@@ -17,7 +17,8 @@ export class CursosCursosService {
       fechaInicio: new Date(2022, 0, 1),
       fechaFin: new Date(2022, 1, 28),
       inscripcionAbierta: true,
-      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg'
+      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg',
+      descripcion:'lorem'
     },
     {
       id: 2,
@@ -27,7 +28,8 @@ export class CursosCursosService {
       fechaInicio: new Date(2022, 2, 1),
       fechaFin: new Date(2022, 3, 30),
       inscripcionAbierta: true,
-      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg'
+      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg',
+      descripcion:'lorem'
     },
     {
       id: 3,
@@ -37,7 +39,8 @@ export class CursosCursosService {
       fechaInicio: new Date(2022, 1, 1),
       fechaFin: new Date(2022, 3, 28),
       inscripcionAbierta: false,
-      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg'
+      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg',
+      descripcion:'lorem'
     },
     {
       id: 4,
@@ -47,7 +50,8 @@ export class CursosCursosService {
       fechaInicio: new Date(2022, 5, 1),
       fechaFin: new Date(2022, 6, 30),
       inscripcionAbierta: false,
-      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg'
+      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg',
+      descripcion:'lorem'
     },
   ];
   cursos$: Observable<Curso[]>;
@@ -76,6 +80,12 @@ obtenerCursosObservable(){
  
   return this.cursosSubject.asObservable();
  
+}
+
+obtenerCurso(id: number): Observable<Curso>{
+  return this.obtenerCursosObservable().pipe(
+    map((cursos: Curso[]) => cursos.filter((curso: Curso) => curso.id === id)[0])
+  )
 }
 agregarCurso(curso: Curso){
   this.cursos.push(curso);

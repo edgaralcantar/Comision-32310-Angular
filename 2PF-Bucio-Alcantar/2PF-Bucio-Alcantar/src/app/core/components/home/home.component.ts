@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, filter, from, map, Observable, of, pipe } from 'rxjs';
 
 import { Curso } from 'src/app/models/curso';
-import { CursosService } from 'src/app/services/cursos.service';
+
 import { CursosCoreService } from '../../services/cursos-core.service';
 
 @Component({
@@ -54,7 +54,8 @@ export class HomeComponent implements OnInit {
       fechaInicio: new Date(2022, 5, 1),
       fechaFin: new Date(2022, 6, 30),
       inscripcionAbierta: false,
-      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg'
+      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg',
+      descripcion:'lorem'
      }
     this.cursoService.agregarCurso(curso);
   }

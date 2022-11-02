@@ -1,5 +1,8 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Sesion } from 'src/app/models/sesion';
+import { SesionService } from '../../services/sesion.service';
 
 @Component({
   selector: 'app-sidevar',
@@ -8,10 +11,12 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 })
 export class SidevarComponent implements OnInit {
   mobileQuery: MediaQueryList;
+  sesion$!: Observable<Sesion>;
  
  // fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
 fillerNav = [
   {name:'Home',route:"home",icon:'home'},
+  {name:'Autenticacion',route:"autenticacion",icon:'library_books'},
   {name:'Cursos',route:"lista-cursos",icon:'library_books'},
  // {name:'editar',route:"editar-curso",icon:'library_books'},
   {name:'Alumnos',route:"lista-alumnos",icon:'list_alt'},
@@ -28,7 +33,10 @@ fillerNav = [
   );
  
   private _mobileQueryListener: () => void;
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) { 
+  constructor(
+    changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
+    private sesionService: SesionService
+    ) { 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -36,6 +44,7 @@ fillerNav = [
 
   ngOnInit(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.sesion$ = this.sesionService.obtenerSesion();
   }
   shouldRun = true;
 }

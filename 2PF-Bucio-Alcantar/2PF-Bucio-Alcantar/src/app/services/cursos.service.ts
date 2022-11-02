@@ -1,12 +1,14 @@
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, of, map } from 'rxjs';
+import { Observable, BehaviorSubject, of, map, catchError, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Curso } from '../models/curso';
 @Injectable({
   providedIn: 'root'
 })
 export class CursosService {
 
-  cursos: Curso[] = [
+  /*cursos: Curso[] = [
       {
         id:1,
         nombre: 'Angular',
@@ -47,18 +49,19 @@ export class CursosService {
         inscripcionAbierta: false,
         imagen: 'https://parentesis.com/imagesPosts/coder00.jpg'
       },
-    ];
-    cursos$: Observable<Curso[]>;
-    cursosSubject: BehaviorSubject<Curso[]>;
+    ];*/
+   // cursos$: Observable<Curso[]>;
+   // cursosSubject: BehaviorSubject<Curso[]>;
 
-  constructor() { 
-    this.cursosSubject = new BehaviorSubject<Curso[]>(this.cursos);
-    this.cursos$ = new Observable<Curso[]>((suscriptor) => {
-      suscriptor.next(this.cursos)})
+  constructor(   private http: HttpClient) { 
+ 
+  //  this.cursosSubject = new BehaviorSubject<Curso[]>(this.cursos);
+  //  this.cursos$ = new Observable<Curso[]>((suscriptor) => {
+ //     suscriptor.next(this.cursos)})
 
   }
 
-  /*obtenerCursosPromise(): Promise<Curso[] | any>{
+  /*este no obtenerCursosPromise(): Promise<Curso[] | any>{
     return new Promise((resolve, reject) => {
       if(this.cursos.length > 0){
         resolve(this.cursos);
@@ -69,11 +72,16 @@ export class CursosService {
         });
       }
     });
-  }*/
-  obtenerCursosObservable(){
+  }este no*/
+ /* obtenerCursosObservable(){
    
     return this.cursosSubject.asObservable();
    
+  }
+  obtenerCurso(id: number): Observable<Curso>{
+    return this.obtenerCursosObservable().pipe(
+      map((cursos: Curso[]) => cursos.filter((curso: Curso) => curso.id === id)[0])
+    )
   }
   agregarCurso(curso: Curso){
     this.cursos.push(curso);
@@ -96,6 +104,63 @@ export class CursosService {
     }
   
     this.cursosSubject.next(this.cursos);
+  }*/
+
+  obtenerCursosObservable(): Observable<Curso[]>{
+    return this.http.get<Curso[]>(`${environment.apiC}/cursos`, {
+      headers: new HttpHeaders({
+        'content-type': 'application/json',
+        'encoding': 'UTF-8'
+      })
+    }).pipe(
+      catchError(this.manejarError)
+    )
+  }
+
+  obtenerCurso(id: number): Observable<Curso>{
+    return this.http.get<Curso>(`${environment.apiC}/cursos/${id}`, {
+      headers: new HttpHeaders({
+        'content-type': 'application/json',
+        'encoding': 'UTF-8'
+      })
+    }).pipe(
+      catchError(this.manejarError)
+    )
+  }
+
+  agregarCurso(curso: Curso){
+    this.http.post(`${environment.apiC}/cursos/`, curso, {
+      headers: new HttpHeaders({
+        'content-type': 'application/json',
+        'encoding': 'UTF-8'
+      })
+    }).pipe(
+      catchError(this.manejarError)
+    ).subscribe(console.log);
+  }
+
+  editarCurso(curso: Curso){
+    this.http.put<Curso>(`${environment.apiC}/cursos/${curso.id}`, curso).pipe(
+      catchError(this.manejarError)
+    ).subscribe(console.log);
+    alert("Registro Actualizado"); 
+  }
+
+  eliminarCurso(id: number){
+    this.http.delete<Curso>(`${environment.apiC}/cursos/${id}`).pipe(
+      catchError(this.manejarError)
+    ).subscribe(console.log);
+    alert("Registro eliminado");  
+  }
+
+  private manejarError(error: HttpErrorResponse){
+    if(error.error instanceof ErrorEvent){
+      console.warn('Error del lado del cliente', error.error.message);
+    }else{
+      console.warn('Error del lado del servidor', error.error.message);
+    }
+
+    return throwError(() => new Error('Error en la comunicacion HTTP'));
   }
 
 }

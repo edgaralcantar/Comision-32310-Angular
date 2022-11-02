@@ -16,7 +16,8 @@ export class CursosCoreService {
       fechaInicio: new Date(2022, 0, 1),
       fechaFin: new Date(2022, 1, 28),
       inscripcionAbierta: true,
-      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg'
+      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg',
+      descripcion:'lorem'
     },
     {
       id:2,
@@ -26,7 +27,8 @@ export class CursosCoreService {
       fechaInicio: new Date(2022, 2, 1),
       fechaFin: new Date(2022, 3, 30),
       inscripcionAbierta: true,
-      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg'
+      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg',
+      descripcion:'lorem'
     },
     {
       id:3,
@@ -36,7 +38,8 @@ export class CursosCoreService {
       fechaInicio: new Date(2022, 1, 1),
       fechaFin: new Date(2022, 3, 28),
       inscripcionAbierta: false,
-      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg'
+      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg',
+      descripcion:'lorem'
     },
     {
       id:4,
@@ -46,7 +49,8 @@ export class CursosCoreService {
       fechaInicio: new Date(2022, 5, 1),
       fechaFin: new Date(2022, 6, 30),
       inscripcionAbierta: false,
-      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg'
+      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg',
+      descripcion:'lorem'
     },
   ];
   cursos$: Observable<Curso[]>;
@@ -59,7 +63,7 @@ constructor() {
 
 }
 
-obtenerCursosPromise(): Promise<Curso[] | any>{
+/*obtenerCursosPromise(): Promise<Curso[] | any>{
   return new Promise((resolve, reject) => {
     if(this.cursos.length > 0){
       resolve(this.cursos);
@@ -69,8 +73,8 @@ obtenerCursosPromise(): Promise<Curso[] | any>{
         mensaje: 'No hay cursos disponibles en este momento'
       });
     }
-  });
-}
+  })
+}*/
 obtenerCursosObservable(){
  
   return this.cursosSubject.asObservable();

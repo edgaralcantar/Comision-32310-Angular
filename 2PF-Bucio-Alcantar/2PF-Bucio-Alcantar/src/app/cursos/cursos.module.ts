@@ -19,6 +19,8 @@ import { matDatepickerAnimations, MatDatepickerModule } from "@angular/material/
 import { MatNativeDateModule } from "@angular/material/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { DetalleCursoComponent } from './components/detalle-curso/detalle-curso.component';
+import { AgregarCursoComponent } from './components/agregar-curso/agregar-curso.component';
 
 
 @NgModule({
@@ -35,6 +37,8 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
       FiltroCursosCursosPipe,
       EditarCursoComponent,
       CursosInicioComponent,
+      DetalleCursoComponent,
+      AgregarCursoComponent,
      
     ],
     imports: [

@@ -1,4 +1,4 @@
-<h3>Editar curso</h3>
+<h3 class="titulo">Editar curso</h3>
 
 <form [formGroup]="formulario" (ngSubmit)="editarCurso()">
     <div class="row">
@@ -20,6 +20,18 @@
             <mat-form-field appearance="fill" class="fill">
                 <mat-label>Nombre del profesor del curso</mat-label>
                 <input matInput formControlName="profesor">
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field appearance="fill" class="fill">
+                <mat-label>Descripcion del curso</mat-label>
+                <input matInput formControlName="descripcion">
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field appearance="fill" class="fill">
+                <mat-label>Url de imagen</mat-label>
+                <input matInput formControlName="imagen">
             </mat-form-field>
         </div>
 
@@ -48,7 +60,7 @@
         </div>
 
         <div class="col-md-12">
-            <button mat-raised-button color="primary" type="submit" class="fill">Agregar curso</button>
+            <button mat-raised-button color="primary" type="submit" class="fill">Actualizar curso</button>
         </div>
     </div>
 </form>

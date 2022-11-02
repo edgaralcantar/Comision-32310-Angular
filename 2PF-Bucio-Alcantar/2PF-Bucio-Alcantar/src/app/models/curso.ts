@@ -7,4 +7,5 @@ export interface Curso{
     fechaFin: Date;
     inscripcionAbierta: boolean;
     imagen: string;
+    descripcion: string;
 }
