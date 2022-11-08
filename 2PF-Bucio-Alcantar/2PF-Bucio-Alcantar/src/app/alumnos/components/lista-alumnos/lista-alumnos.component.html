@@ -5,7 +5,7 @@
 
     <mat-form-field class="col-md-6">
         <mat-label>Filtrar por numero de nombre</mat-label>
-        <input type="text" matInput (keyup)="filtrarNombre($event)">
+        <input type="text" matInput  [(ngModel)]="filtro" (keyup)="filtrarNombre($event)">
     </mat-form-field>
     <div class="col-md-4">
         <button mat-stroked-button color="primary" (click)="agregarAlumno()">Agregar Alumno</button>
@@ -33,78 +33,84 @@
 
 
 <div class="row marg">
-    <table mat-table [dataSource]="dataSource" class="col-md-12">
+    <table mat-table [dataSource]="dataSource$ "  class="col-md-12">
         <!-- 'nombre' -->
         <ng-container matColumnDef="nombre">
             <th mat-header-cell *matHeaderCellDef><span appTitulos>Nombre</span></th>
-            <td mat-cell *matCellDef="let curso">{{ curso.nombre | uppercase }} {{ curso.apellidos | uppercase }}</td>
+            <td mat-cell *matCellDef="let alumno">{{ alumno.nombre | uppercase }} {{ alumno.apellidos  | uppercase}}</td>
         </ng-container>
          <!-- 'edad' -->
          <ng-container matColumnDef="edad">
             <th mat-header-cell *matHeaderCellDef><span appTitulos>Edad</span></th>
-            <td mat-cell *matCellDef="let curso">{{ curso.edad | uppercase }}</td>
+            <td mat-cell *matCellDef="let alumno">{{ alumno.edad  }}</td>
         </ng-container>
          <!-- 'telefono' -->
          <ng-container matColumnDef="telefono">
             <th mat-header-cell *matHeaderCellDef><span appTitulos>Telefono</span></th>
-            <td mat-cell *matCellDef="let curso">{{ curso.telefono | uppercase }}</td>
+            <td mat-cell *matCellDef="let alumno">{{ alumno.telefono }}</td>
         </ng-container>
          <!-- 'correo' -->
          <ng-container matColumnDef="correo">
             <th mat-header-cell *matHeaderCellDef><span appTitulos>Correo</span></th>
-            <td mat-cell *matCellDef="let curso">{{ curso.correo }} </td>
+            <td mat-cell *matCellDef="let alumno">{{ alumno.correo }} </td>
         </ng-container>
 
-        <!-- 'curso' -->
-        <ng-container matColumnDef="curso">
+        <!-- 'alumno' -->
+         <!-- 
+        <ng-container matColumnDef="alumno">
             <th mat-header-cell *matHeaderCellDef><span appTitulos>Curso</span></th>
-            <td mat-cell *matCellDef="let curso">{{ curso.curso }}</td>
-        </ng-container>
+            <td mat-cell *matCellDef="let alumno">{{ alumno.alumno }}</td>
+        </ng-container> -->
 
         <!-- 'profesor' -->
+         <!-- 
         <ng-container matColumnDef="profesor">
             <th mat-header-cell *matHeaderCellDef><span appTitulos>Profesor</span></th>
-            <td mat-cell *matCellDef="let curso">{{ curso.profesor }}</td>
-        </ng-container>
+            <td mat-cell *matCellDef="let alumno">{{ alumno.profesor }}</td>
+        </ng-container>-->
         
         <!-- 'fechaInicio' -->
+         <!-- 
         <ng-container matColumnDef="fechaInicio">
             <th mat-header-cell *matHeaderCellDef><span appTitulos>Inicia</span></th>
-            <td mat-cell *matCellDef="let curso">{{ curso.fechaInicio | date: 'dd/MM/YYYY' }}</td>
-        </ng-container>
+            <td mat-cell *matCellDef="let alumno">{{ alumno.fechaInicio | date: 'dd/MM/YYYY' }}</td>
+        </ng-container>-->
         
         <!-- 'fechaFin' -->
+         <!-- 
         <ng-container matColumnDef="fechaFin">
             <th mat-header-cell *matHeaderCellDef><span appTitulos>Finaliza</span></th>
-            <td mat-cell *matCellDef="let curso">{{ curso.fechaFin | date: 'dd/MM/YYYY' }}</td>
-        </ng-container>
-         <!-- 'status' -->
+            <td mat-cell *matCellDef="let alumno">{{ alumno.fechaFin | date: 'dd/MM/YYYY' }}</td>
+        </ng-container>-->
+
+         <!-- 'status' --> 
          <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef><span appTitulos>Status</span></th>
-            <td mat-cell *matCellDef="let curso">
-                <span [appBooleandoEstiloAlumnos]="curso.status"> {{ curso.status | booleanATextoAlumnos: 'Si': 'No' }} </span>
+            <td mat-cell *matCellDef="let alumno">
+                <span [appBooleandoEstiloAlumnos]="alumno.status"> {{ alumno.status | booleanATextoAlumnos: 'Si': 'No' }} </span>
             </td>
         </ng-container>
         
         
         <!-- 'inscripcionAbierta' -->
+         <!-- 
         <ng-container matColumnDef="inscripcionAbierta">
             <th mat-header-cell *matHeaderCellDef><span appTitulos>Inscripcion Abierta</span></th>
-            <td mat-cell *matCellDef="let curso">
+            <td mat-cell *matCellDef="let alumno">
                
-                <span [appBooleandoEstiloAlumnos]="curso.inscripcionAbierta"> {{ curso.inscripcionAbierta | booleanATextoAlumnos: 'Si': 'No' }} </span>
+                <span [appBooleandoEstiloAlumnos]="alumno.inscripcionAbierta"> {{ alumno.inscripcionAbierta | booleanATextoAlumnos: 'Si': 'No' }} </span>
             
             </td>
-        </ng-container> 
+        </ng-container> -->
         
         <!-- 'acciones' -->
         <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef><span appTitulos>Acciones</span></th>
-            <td mat-cell *matCellDef>
-                <button mat-icon-button (click)="editar()">
+            <td mat-cell *matCellDef="let alumno">
+                <button mat-icon-button (click)="editar(alumno)">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-icon-button>
+                <button mat-icon-button (click)="eliminar(alumno.id)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>

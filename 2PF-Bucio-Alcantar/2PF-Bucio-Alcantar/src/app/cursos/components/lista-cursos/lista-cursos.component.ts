@@ -5,7 +5,6 @@ import { BehaviorSubject, filter, from, map, Observable, of, pipe } from 'rxjs';
 import { Curso } from 'src/app/models/curso';
 import { CursosService } from 'src/app/services/cursos.service';
 
-import { CursosCursosService } from '../../services/cursos-cursos.service';
 
 @Component({
   selector: 'app-lista-cursos',
@@ -32,13 +31,14 @@ export class ListaCursosComponent implements OnInit {
     this.suscripcion = cursoService.obtenerCursosObservable().subscribe({
       next: (cursos: Curso[]) => {
         this.cursos = cursos;
-         console.log('Desde el observable', cursos);
+         console.log('Desde el observable12', cursos);
       },
       error: (error) => {
         console.error(error);
       }
     });
     this.cursos$ = cursoService.obtenerCursosObservable();
+    console.log('Desde el observable-lista', this.cursos$);
   }
  
   ngOnDestroy(){

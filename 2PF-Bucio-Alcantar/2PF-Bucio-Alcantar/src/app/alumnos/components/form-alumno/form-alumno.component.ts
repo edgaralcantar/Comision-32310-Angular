@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatosA } from 'src/app/data/alumnos';
 import { Alumno } from 'src/app/models/alumno';
+import { Usuario } from 'src/app/models/usuario';
+import { AlumnosService } from 'src/app/services/alumnos.service';
 import { CursosA } from '../../data/cursosData';
 
 @Component({
@@ -16,7 +18,12 @@ export class FormAlumnoComponent implements OnInit {
   formularioUsuario: FormGroup;
   
   contrasenasIguales!: boolean;
-  constructor( private fb: FormBuilder,private router: Router, private route: ActivatedRoute) {
+  constructor( 
+    private fb: FormBuilder,
+    private router: Router, 
+    private route: ActivatedRoute,
+    private alumnosService: AlumnosService,
+    ) {
     this.formularioUsuario = fb.group(
       {
         nombre: new FormControl('',[Validators.required]),
@@ -37,8 +44,28 @@ export class FormAlumnoComponent implements OnInit {
     const contrasena1 = this.formularioUsuario.value.contrasena;
     const contrasena2 = this.formularioUsuario.value.contrasena2;
     this.contrasenasIguales = contrasena1 === contrasena2;
-console.log( this.formularioUsuario.value);
-this.router.navigate(['/home',this.formularioUsuario.value.nombre +'/'+ this.formularioUsuario.value.apellido +'/'
- + this.formularioUsuario.value.edad + '/'+this.formularioUsuario.value.telefono +'/'+ this.formularioUsuario.value.correo]);
+    let c: Alumno = {
+      id: '3',
+      nombre: this.formularioUsuario.value.nombre,
+      apellidos: this.formularioUsuario.value.apellido,
+      edad: this.formularioUsuario.value.edad,
+      telefono: this.formularioUsuario.value.telefono,
+      correo: this.formularioUsuario.value.correo,
+      status: true,
+     
+    } 
+    this.alumnosService.agregarAlumno(c);
+    
+    let us: Usuario ={
+      usuario: this.formularioUsuario.value.correo,
+      contrasena: this.formularioUsuario.value.contrasena,
+     admin: false
+    }
+  console.log('persona', this.formularioUsuario.value.nombre);
+   this.alumnosService.agregarUsuario(us)
+  
+    this.router.navigate(['home'])
   }
 }
+
+

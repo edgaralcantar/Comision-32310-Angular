@@ -20,4 +20,24 @@ describe('AgregarCursoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  ////////////////////////////////////////
+
+  it('El formulario se mantiene invalido cuando no esta lleno por completo los campos', () => {
+    const formulario = component.formularioCurso;
+   // const comision = formulario.controls['comision'];
+
+   // comision.setValue('32350');
+
+    expect(formulario.valid).toBeFalse();
+  })
+
+  it('El formulario se mantiene valido cuando ingreso todos los campos', () => {
+    const formulario = component.formularioCurso;
+  //  const nombre = formulario.controls['nombre'];
+
+  //  nombre.setValue('Angular');
+
+    expect(formulario.valid).toBeTrue();
+  })
+
 });

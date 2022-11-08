@@ -1,5 +1,5 @@
 
-<p class="titulo">Registrar Alumno</p>
+<p class="titulo ">Actualizar Alumno</p>
 <form [formGroup]="formularioUsuario"class=" fondo">
     <div class="row mgn">
        <div class="col-3"></div>
@@ -25,7 +25,7 @@
        
    </div>
    <div class="col-4">
-       <input type="text" formControlName="apellido" class="tam" />
+       <input type="text" formControlName="apellidos" class="tam" />
            <p class="txtrojo" *ngIf="formularioUsuario.get('apellido')?.touched && formularioUsuario.get('apellido')?.errors?.['required']">*Este campo es requerido</p>
       
    </div>
@@ -55,7 +55,7 @@
    
    </div>
    <div class="col-4">
-       <input type="number" formControlName="telefono" class="tam"/>
+       <input type="text" formControlName="telefono" class="tam"/>
        <p class="txtrojo" *ngIf="formularioUsuario.get('telefono')?.touched && formularioUsuario.get('telefono')?.errors?.['required']">*Este campo es requerido</p>
    </div>
    <div class="col-3"></div>
@@ -75,7 +75,20 @@
    </div>
    <div class="col-3"></div>
     </div>
+
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-1 column">
+        <label >Status:</label>
     
+    </div>
+    <div class="col-4 ">
+        <mat-slide-toggle formControlName="status"></mat-slide-toggle>
+    </div>
+    <div class="col-3"></div>
+
+</div>
+     <!--
     
     <div class="row">
        <div class="col-3"></div>
@@ -92,7 +105,7 @@
     <div class="col-3"></div>
     </div>
     
-   
+  
     <div class="row">
        <div class="col-3"></div>
        <div class="col-1 column">
@@ -110,7 +123,7 @@
        </div>
        <div class="col-3"></div>
     </div>
-    
+    -->
    <!-- <div class="combo">
         
         <select class="form-select " aria-label="Selecciona un curso">
@@ -121,7 +134,7 @@
    
        
       <div  class="boton">
-       <button (click)="agregarUsuario() "type="submit" [disabled]="formularioUsuario.invalid" class="boton">Agregar usuario</button>
+       <button (click)="actualizarUsuario() "type="submit" [disabled]="formularioUsuario.invalid" class="boton">Actualizar usuario</button>
       </div>
    
     

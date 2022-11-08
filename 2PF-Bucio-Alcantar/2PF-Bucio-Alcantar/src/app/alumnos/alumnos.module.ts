@@ -13,6 +13,8 @@ import { BooleandoEstiloAlumnosDirective } from './directives/booleando-estilo-a
 import { BooleanATextoAlumnosPipe } from "./pipes/boolean-a-texto-alumnos.pipe";
 import { RouterModule } from "@angular/router";
 import { AlumnosRoutingModule } from "./alumnos-routing.module";
+import { MisCursosComponent } from './components/mis-cursos/mis-cursos.component';
+import { EditarAlumnoComponent } from './components/editar-alumno/editar-alumno.component';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { AlumnosRoutingModule } from "./alumnos-routing.module";
      PaginaNoEncontradaAComponent,
      BooleandoEstiloAlumnosDirective,
      BooleanATextoAlumnosPipe,
+     MisCursosComponent,
+     EditarAlumnoComponent,
      
 
     

@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EditarAlumnoComponent } from './alumnos/components/editar-alumno/editar-alumno.component';
 import { FormAlumnoComponent } from './alumnos/components/form-alumno/form-alumno.component';
 import { ListaAlumnosComponent } from './alumnos/components/lista-alumnos/lista-alumnos.component';
+import { MisCursosComponent } from './alumnos/components/mis-cursos/mis-cursos.component';
 import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { LoginComponent } from './autenticacion/login/login.component';
 import { FooterComponent } from './core/components/footer/footer.component';
@@ -21,7 +23,7 @@ const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'home', component: HomeComponent},
     {path: 'autenticacion', component: LoginComponent},
-
+    {path: 'editar-alumno', component: EditarAlumnoComponent},
     {path: 'cursos',
   loadChildren: () => import('./cursos/cursos.module').then((m) => m.CursosModule )
   },
@@ -31,9 +33,11 @@ const routes: Routes = [
     {path: 'editar-curso', component: EditarCursoComponent},
     {path: 'footer', component: FooterComponent},
     {path: 'pagina-no-encontrada-c', component: PaginaNoEncontradaCComponent},
-   {path: 'form-alumno', component: FormAlumnoComponent, canActivate: [ AdminGuard]},
+   {path: 'form-alumno', component: FormAlumnoComponent, },
    {path: 'form-curso', component: AgregarCursoComponent},
+   {path: 'mis-cursos', component: MisCursosComponent},
    {path: ':id', component: DetalleCursoComponent},
+  
     {path: '**',component: HomeComponent}
 ];
 

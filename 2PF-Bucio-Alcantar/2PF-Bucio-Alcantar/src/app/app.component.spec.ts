@@ -16,16 +16,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title '1PF-Bucio-Alcantar'`, () => {
+  it(`should have as title '2PF-Bucio-Alcantar'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('1PF-Bucio-Alcantar');
+    expect(app.title).toEqual('2PF-Bucio-Alcantar');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('1PF-Bucio-Alcantar app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('2PF-Bucio-Alcantar app is running!');
   });
 });
+ 

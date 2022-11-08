@@ -2,6 +2,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Sesion } from 'src/app/models/sesion';
+import { AdminGuard } from '../../guards/admin.guard';
 import { SesionService } from '../../services/sesion.service';
 
 @Component({
@@ -21,6 +22,8 @@ fillerNav = [
  // {name:'editar',route:"editar-curso",icon:'library_books'},
   {name:'Alumnos',route:"lista-alumnos",icon:'list_alt'},
   {name:'Registra Alumno',route:"form-alumno",icon:'person_add'},
+  {name:'Mis cursos',route:"mis-cursos",icon:'list_alt', },
+  
 ]
   fillerContent = Array.from(
     {length: 50},
