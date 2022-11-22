@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Alumno } from 'src/app/models/alumno';
-import { DatosA } from 'src/app/data/alumnos';
+
 import { MatTableDataSource } from '@angular/material/table';
 import { DataSource } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
@@ -65,7 +65,7 @@ dataSource$: Observable<Alumno[]> ;
   }
   editar(alumno: Alumno){
     this.router.navigate(['editar-alumno', alumno])
-   // console.log(this.alumnos);
+   
   }
   agregarAlumno(){
     this.router.navigate(['form-alumno']);

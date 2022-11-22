@@ -17,6 +17,9 @@ import { FooterComponent } from "./components/footer/footer.component";
 import { ToolbarComponent } from "./components/toolbar/toolbar.component";
 import { SidevarComponent } from "./components/sidevar/sidevar.component";
 import { CoreRoutingModule } from "./core-routing.module";
+import { StoreModule } from "@ngrx/store";
+import { sesionFeatureKey, reducer } from "./state/sesion.reducer";
+import { SesionService } from "./services/sesion.service";
 
 
 @NgModule({
@@ -34,10 +37,11 @@ import { CoreRoutingModule } from "./core-routing.module";
       CommonModule,
       FormsModule,
       MaterialModule, 
-     CoreRoutingModule
+     CoreRoutingModule,
+     StoreModule.forFeature(sesionFeatureKey, reducer)
     ],
     providers: [
-    
+      SesionService
     ],
     exports:[
       

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Sesion } from 'src/app/models/sesion';
-import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario';
 import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Alumno } from 'src/app/models/alumno';
@@ -18,24 +18,34 @@ export class SesionService {
     };
     this.sesionSubject = new BehaviorSubject(sesion);
   }
-
-  login(usuario: string, contrasena: string, admin: boolean){
-    const sesion: Sesion = {
-      sesionActiva: true,
-      usuarioActivo: {
-        usuario: usuario,
-        contrasena: contrasena,
-        admin: admin
-      }
-    }
-
-    this.sesionSubject.next(sesion);
+  login(usuario: Usuario): Observable<Usuario>{
+   
+    return this.http.get<Usuario[]>(`${environment.apiC}/usuario`).pipe(
+      map((usuarios: Usuario[]) => {
+        return usuarios.filter((u: Usuario) => u.usuario === usuario.usuario && u.contrasena===usuario.contrasena)[0]
+      
+      }));
+      
   }
 
   obtenerSesion(): Observable<Sesion>{
     return this.sesionSubject.asObservable();
   }
-  obtenerRol(): Observable<Usuario[]>{
+ /* login(usuario: string, contrasena: string, admin: boolean){
+    const sesion: Sesion = {
+      sesionActiva: true,
+      usuarioActivo: {
+        usuario: usuario,
+        contrasena: contrasena,
+        admin: admin,
+        sesionActiva: true,
+      }
+    }
+
+    this.sesionSubject.next(sesion);
+  }*/
+ 
+  /*obtenerRol(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(`${environment.apiC}/usuario}`, {
       headers: new HttpHeaders({
         'content-type': 'application/json',
@@ -44,9 +54,17 @@ export class SesionService {
     }).pipe(
       catchError(this.manejarError)
     )
+  }*/
+ /* CerrarSecion() Observable<Sesion>{
+
   }
 
-
+ editarCurso(curso: Curso){
+    this.http.put<Curso>(`${environment.apiC}/cursos/${curso.id}`, curso).pipe(
+      catchError(this.manejarError)
+    ).subscribe(console.log);
+    alert("Registro Actualizado"); 
+  }*/
 
 
   private manejarError(error: HttpErrorResponse){

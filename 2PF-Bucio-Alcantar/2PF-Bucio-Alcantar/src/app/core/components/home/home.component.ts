@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject, filter, from, map, Observable, of, pipe } from 'rxjs';
+import { loadCursosSuccess, loadCursosFailure } from 'src/app/cursos/state/cursos.actions';
+import { selectStateCursos, selectStateCargando } from 'src/app/cursos/state/cursos.selectors';
 
 import { Curso } from 'src/app/models/curso';
+import { CursoState } from 'src/app/models/curso.state';
+import { CursosService } from 'src/app/services/cursos.service';
 
-import { CursosCoreService } from '../../services/cursos-core.service';
+
 
 @Component({
   selector: 'app-home',
@@ -11,6 +17,7 @@ import { CursosCoreService } from '../../services/cursos-core.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  cargando$!: Observable<boolean>;
   filtro: string = '';
   //cursos: Curso[] = DatosC.cursos;
   cursos!: Curso[]; 
@@ -19,19 +26,16 @@ export class HomeComponent implements OnInit {
   suscripcion: any
   
 
-  constructor(    private cursoService: CursosCoreService) {
+  constructor(    
+    private cursoService: CursosService,
+    private router: Router,
+    private store: Store<CursoState>
+    ) {
   //  this.promesa = cursoService.obtenerCursosPromise()
-    
-    this.suscripcion = cursoService.obtenerCursosObservable().subscribe({
-      next: (cursos: Curso[]) => {
-        this.cursos = cursos;
-         console.log('Desde el observable', cursos);
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
-    this.cursos$ = cursoService.obtenerCursosObservable();
+  this.cursos$ = this.store.select(selectStateCursos); 
+  this.cargando$ = this.store.select(selectStateCargando);
+
+  
   }
  
   ngOnDestroy(){
@@ -40,25 +44,20 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     
-    
+    this.suscripcion = this.cursoService.obtenerCursosObservable().subscribe({
+      next: (cursos: Curso[]) => {
+        this.store.dispatch(loadCursosSuccess({cursos}));
+      },
+      error: (error: any) => {
+        alert("Hubo un error")
+        this.store.dispatch(loadCursosFailure(error));
+      }
+    });
     
    
    
   }
-  agregarCurso(){
-    let curso: Curso = {
-      id:5,
-      nombre: 'Kotlin',
-      comision: '34310',
-      profesor: 'Mario',
-      fechaInicio: new Date(2022, 5, 1),
-      fechaFin: new Date(2022, 6, 30),
-      inscripcionAbierta: false,
-      imagen: 'https://parentesis.com/imagesPosts/coder00.jpg',
-      descripcion:'lorem'
-     }
-    this.cursoService.agregarCurso(curso);
-  }
+
   filtroCurso(){
      console.log(this.filtro);
     this.cursos$ = this.cursoService.obtenerCursosObservable().pipe(
@@ -69,7 +68,8 @@ export class HomeComponent implements OnInit {
      )
   }
 
-  VerCurso(){
-    
+  verCurso(curso: Curso){
+    console.log("se va a mandar "+curso);
+    this.router.navigate(['detalle-curso/', curso], /*{skipLocationChange: true }*/);
   }
 }

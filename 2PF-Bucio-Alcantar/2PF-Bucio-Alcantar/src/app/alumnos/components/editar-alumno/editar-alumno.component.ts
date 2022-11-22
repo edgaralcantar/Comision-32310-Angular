@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { Alumno } from 'src/app/models/alumno';
 import { AlumnosService } from 'src/app/services/alumnos.service';
-import { CursosService } from 'src/app/services/cursos.service';
+
 
 @Component({
   selector: 'app-editar-alumno',
@@ -22,10 +23,10 @@ export class EditarAlumnoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+   // console.log(this.activatedRoute.paramMap.subscribe((parametros) ));
     this.activatedRoute.paramMap.subscribe((parametros) => {
-      console.log(parametros)
       this.alumno ={
-      id : parametros.get('id') || '0',
+      id : parseInt( parametros.get('id') || '0'),
       nombre:parametros.get('nombre')  || '',
       apellidos:parametros.get('apellidos')  || '', 
       edad: parametros.get('edad') || '',
@@ -46,6 +47,7 @@ export class EditarAlumnoComponent implements OnInit {
        
       });
     })
+    
   
 }
 actualizarUsuario(){
@@ -62,7 +64,7 @@ actualizarUsuario(){
 
   this.alumnosService.editarAlumno(c);
 
-  this.router.navigate(['lista-alumnos'])
+  this.router.navigate(['..'])
 
 }
 

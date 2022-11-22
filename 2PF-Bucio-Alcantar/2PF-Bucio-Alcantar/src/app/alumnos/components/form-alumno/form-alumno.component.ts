@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DatosA } from 'src/app/data/alumnos';
+
 import { Alumno } from 'src/app/models/alumno';
 import { Usuario } from 'src/app/models/usuario';
 import { AlumnosService } from 'src/app/services/alumnos.service';
-import { CursosA } from '../../data/cursosData';
+
 
 @Component({
   selector: 'app-form-alumno',
@@ -13,8 +13,8 @@ import { CursosA } from '../../data/cursosData';
   styleUrls: ['./form-alumno.component.css']
 })
 export class FormAlumnoComponent implements OnInit {
-  alumnos: Alumno[] = DatosA.alumnos;
-  alumnosC: String[] = CursosA.Cursos;
+ 
+  
   formularioUsuario: FormGroup;
   
   contrasenasIguales!: boolean;
@@ -45,7 +45,7 @@ export class FormAlumnoComponent implements OnInit {
     const contrasena2 = this.formularioUsuario.value.contrasena2;
     this.contrasenasIguales = contrasena1 === contrasena2;
     let c: Alumno = {
-      id: '3',
+      id: 3,
       nombre: this.formularioUsuario.value.nombre,
       apellidos: this.formularioUsuario.value.apellido,
       edad: this.formularioUsuario.value.edad,
@@ -57,9 +57,11 @@ export class FormAlumnoComponent implements OnInit {
     this.alumnosService.agregarAlumno(c);
     
     let us: Usuario ={
+      id: 0,
       usuario: this.formularioUsuario.value.correo,
       contrasena: this.formularioUsuario.value.contrasena,
-     admin: false
+     admin: false,
+     //sesionActiva: false
     }
   console.log('persona', this.formularioUsuario.value.nombre);
    this.alumnosService.agregarUsuario(us)

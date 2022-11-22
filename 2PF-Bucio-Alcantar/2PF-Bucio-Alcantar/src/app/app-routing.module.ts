@@ -18,6 +18,8 @@ import { DetalleCursoComponent } from './cursos/components/detalle-curso/detalle
 import { EditarCursoComponent } from './cursos/components/editar-curso/editar-curso.component';
 import { ListaCursosComponent } from './cursos/components/lista-cursos/lista-cursos.component';
 import { PaginaNoEncontradaCComponent } from './cursos/components/pagina-no-encontrada-c/pagina-no-encontrada-c.component';
+import { EditarDialogComponent } from './inscripciones/components/editar-dialog/editar-dialog.component';
+import { ListaIncripcionesComponent } from './inscripciones/components/lista-incripciones/lista-incripciones.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -37,6 +39,9 @@ const routes: Routes = [
    {path: 'form-curso', component: AgregarCursoComponent},
    {path: 'mis-cursos', component: MisCursosComponent},
    {path: ':id', component: DetalleCursoComponent},
+   { path: 'lista-incripciones', component: ListaIncripcionesComponent },
+   { path: 'editar-incripciones', component: EditarDialogComponent },
+   
   
     {path: '**',component: HomeComponent}
 ];

@@ -10,7 +10,9 @@ import { Usuario } from '../models/usuario';
 })
 export class AlumnosService {
 
-  constructor( private http: HttpClient) { }
+  constructor( 
+    private http: HttpClient,
+  ) { }
 
   obtenerAlumnos(): Observable<Alumno[]>{
    
@@ -24,6 +26,7 @@ export class AlumnosService {
     )
    
   }
+
 
   obtenerAlumno(id: number): Observable<Alumno>{
     return this.http.get<Alumno>(`${environment.apiC}/alumno/${id}`, {

@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject, filter, from, map, Observable, of, pipe } from 'rxjs';
 
 import { Curso } from 'src/app/models/curso';
+import { CursoState } from 'src/app/models/curso.state';
 import { CursosService } from 'src/app/services/cursos.service';
+import { loadCursosSuccess, loadCursosFailure } from '../../state/cursos.actions';
+import { selectStateCursos, selectStateCargando } from '../../state/cursos.selectors';
 
 
 @Component({
@@ -13,6 +17,7 @@ import { CursosService } from 'src/app/services/cursos.service';
 })
 export class ListaCursosComponent implements OnInit {
 
+  cargando$!: Observable<boolean>;
   filtro: string = '';
   //cursos: Curso[] = DatosC.cursos;
   cursos!: Curso[]; 
@@ -22,23 +27,16 @@ export class ListaCursosComponent implements OnInit {
   
 
   constructor(
-    //private cursoService: CursosCursosService,
+  
         private cursoService: CursosService,
-        private router: Router
+        private router: Router,
+        private store: Store<CursoState>
         ) {
-  //  this.promesa = cursoService.obtenerCursosPromise()
+          this.cursos$ = this.store.select(selectStateCursos); 
+          this.cargando$ = this.store.select(selectStateCargando);
     
-    this.suscripcion = cursoService.obtenerCursosObservable().subscribe({
-      next: (cursos: Curso[]) => {
-        this.cursos = cursos;
-         console.log('Desde el observable12', cursos);
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
-    this.cursos$ = cursoService.obtenerCursosObservable();
-    console.log('Desde el observable-lista', this.cursos$);
+  
+
   }
  
   ngOnDestroy(){
@@ -46,7 +44,15 @@ export class ListaCursosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.suscripcion = this.cursoService.obtenerCursosObservable().subscribe({
+      next: (cursos: Curso[]) => {
+        this.store.dispatch(loadCursosSuccess({cursos}));
+      },
+      error: (error: any) => {
+        alert("Hubo un error")
+        this.store.dispatch(loadCursosFailure(error));
+      }
+    });
     
     
    

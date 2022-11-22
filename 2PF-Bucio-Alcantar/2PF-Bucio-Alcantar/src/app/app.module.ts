@@ -3,34 +3,29 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './core/components/home/home.component';
 
-import { ListaAlumnosComponent } from './alumnos/components/lista-alumnos/lista-alumnos.component';
 
-import { TitulosDirective } from './directives/titulos.directive';
-import { BooleanoEstiloDirective } from './directives/booleano-estilo.directive';
-
-import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material.module';
 
-import { BooleanATextoPipe } from './pipes/boolean-a-texto.pipe';
-import { FiltroCursosPipe } from './pipes/filtro-cursos.pipe';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormAlumnoComponent } from './alumnos/components/form-alumno/form-alumno.component';
+
 import { FooterComponent } from './core/components/footer/footer.component';
 import { SidevarComponent } from './core/components/sidevar/sidevar.component';
 import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
 import { CoreModule } from './core/core.module';
 import { CursosModule } from './cursos/cursos.module';
-import { AlumnosModule } from './alumnos/alumnos.module';
-import { ListaCursosComponent } from './cursos/components/lista-cursos/lista-cursos.component';
 
-import { PaginaNoEncontradaComponent } from './core/components/pagina-no-encontrada/pagina-no-encontrada.component';
-import { PaginaNoEncontradaCComponent } from './cursos/components/pagina-no-encontrada-c/pagina-no-encontrada-c.component';
-import { EditarCursoComponent } from './cursos/components/editar-curso/editar-curso.component';
-import { DetalleCursoComponent } from './cursos/components/detalle-curso/detalle-curso.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { cursosFeatureKey, reducer } from './cursos/state/cursos.reducer';
+import { AlumnosModule } from './alumnos/alumnos.module';
+import { EffectsModule } from '@ngrx/effects';
+import { InscripcionesModule } from './inscripciones/inscripciones.module';
+
+
 
 
 
@@ -45,17 +40,22 @@ import { HttpClientModule } from '@angular/common/http';
 
   ],
   imports: [
-    
+    InscripcionesModule,
+    AlumnosModule,
     CoreModule,
    CursosModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserModule,
+    BrowserModule, 
     BrowserAnimationsModule,
     MaterialModule,
-    BrowserModule,
+    BrowserModule, 
     HttpClientModule,
     AppRoutingModule,
+    StoreModule.forRoot({}),
+     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+     EffectsModule.forRoot([])
+
 
    /* RouterModule.forRoot([
       {path: '', component: HomeComponent},

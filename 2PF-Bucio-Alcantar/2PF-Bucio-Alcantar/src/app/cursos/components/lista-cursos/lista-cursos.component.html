@@ -13,6 +13,8 @@
     
 </div> 
 
+<div class="row" *ngIf="!(cargando$ | async)">
+
 <div class="row marg">
 
 
@@ -45,5 +47,6 @@
         </button>
     </mat-card-actions>
 </mat-card>
+</div>
 </div>
 </div>

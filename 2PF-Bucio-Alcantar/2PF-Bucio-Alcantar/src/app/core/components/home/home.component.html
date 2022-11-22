@@ -12,7 +12,7 @@
         </div>-->
     
 </div> 
-
+<div class="row" *ngIf="!(cargando$ | async)">
 <div class="row marg">
 
 
@@ -33,7 +33,7 @@
     </mat-card-content>
 
   <mat-card-actions align="end">
-    <button mat-stroked-button color="primary" [routerLink]="'/'+curso.id">Ver Curso</button>
+    <button mat-stroked-button color="primary"  (click)="verCurso(curso)">Ver Curso</button>
       
         <!--  <button mat-icon-button color="primary">
 
@@ -45,5 +45,6 @@
         </button>-->
     </mat-card-actions>
 </mat-card>
+</div>
 </div>
 </div>

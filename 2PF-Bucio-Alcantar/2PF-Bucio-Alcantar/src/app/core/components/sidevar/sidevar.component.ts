@@ -1,9 +1,15 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { map, Observable, of } from 'rxjs';
+import { Alumno } from 'src/app/models/alumno';
 import { Sesion } from 'src/app/models/sesion';
+import { AlumnosService } from 'src/app/services/alumnos.service';
 import { AdminGuard } from '../../guards/admin.guard';
 import { SesionService } from '../../services/sesion.service';
+import { selectSesionActiva } from '../../state/sesion.selectors';
+
 
 @Component({
   selector: 'app-sidevar',
@@ -13,16 +19,18 @@ import { SesionService } from '../../services/sesion.service';
 export class SidevarComponent implements OnInit {
   mobileQuery: MediaQueryList;
   sesion$!: Observable<Sesion>;
- 
+  alumno$!: Observable<Alumno[]>;
+  alumno!:Alumno;
+  suscripcion: any
  // fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
 fillerNav = [
   {name:'Home',route:"home",icon:'home'},
-  {name:'Autenticacion',route:"autenticacion",icon:'library_books'},
+//  {name:'Autenticacion',route:"autenticacion",icon:'library_books'},
   {name:'Cursos',route:"lista-cursos",icon:'library_books'},
  // {name:'editar',route:"editar-curso",icon:'library_books'},
   {name:'Alumnos',route:"lista-alumnos",icon:'list_alt'},
   {name:'Registra Alumno',route:"form-alumno",icon:'person_add'},
-  {name:'Mis cursos',route:"mis-cursos",icon:'list_alt', },
+  {name:'Inscripciones',route:"lista-incripciones",icon:'list_alt', },
   
 ]
   fillerContent = Array.from(
@@ -37,8 +45,12 @@ fillerNav = [
  
   private _mobileQueryListener: () => void;
   constructor(
+    private router: Router,
     changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
-    private sesionService: SesionService
+    private sesionService: SesionService,
+    private store: Store<Sesion>,
+    private alumnosService: AlumnosService,
+    
     ) { 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -46,8 +58,35 @@ fillerNav = [
   }
 
   ngOnInit(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
-    this.sesion$ = this.sesionService.obtenerSesion();
+   this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.sesion$ = this.store.select(selectSesionActiva);
+
   }
   shouldRun = true;
+  cerrarSesion(){
+    location.reload()
+    //this.router.navigate(['home']);
+  }
+  actualizaPerfil(sesion: Sesion){
+   // console.log('sesion '+sesion.usuarioActivo?.usuario);
+ this.alumno$= this.alumnosService.obtenerAlumnos().pipe(
+    map((alumnos: Alumno[]) => alumnos.filter((alumnos: Alumno) => alumnos.correo === sesion.usuarioActivo?.usuario)
+    )
+   )
+//this.alumno$= this.alumnosService.obtenerAlumno(1);
+
+  
+   
+   
+ this.alumno$.subscribe(a => console.log(a));;
+
+  
+ 
+
+  // this.router.navigate(['editar-alumno' ])
+  }
+  rout(a: Alumno){
+    this.router.navigate(['editar-alumno',a ])
+  }
+
 }

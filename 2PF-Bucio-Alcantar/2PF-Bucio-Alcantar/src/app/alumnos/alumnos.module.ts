@@ -39,7 +39,8 @@ import { EditarAlumnoComponent } from './components/editar-alumno/editar-alumno.
       FormsModule,
       MaterialModule,
       ReactiveFormsModule,
-      AlumnosRoutingModule
+      AlumnosRoutingModule,
+      
       
   
       

@@ -21,6 +21,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { DetalleCursoComponent } from './components/detalle-curso/detalle-curso.component';
 import { AgregarCursoComponent } from './components/agregar-curso/agregar-curso.component';
+import { StoreModule } from "@ngrx/store";
+import { cursosFeatureKey, reducer } from "./state/cursos.reducer";
 
 
 @NgModule({
@@ -49,7 +51,7 @@ import { AgregarCursoComponent } from './components/agregar-curso/agregar-curso.
       ReactiveFormsModule,
     CursosRoutingModule,
    // MatSlideToggleModule
-  
+   StoreModule.forFeature(cursosFeatureKey, reducer)
       
     ],
     providers: [
